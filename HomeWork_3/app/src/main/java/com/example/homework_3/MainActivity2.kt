@@ -1,5 +1,6 @@
 package com.example.homework_3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,29 +15,24 @@ class MainActivity2 : AppCompatActivity() {
         bindingClass2 = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(bindingClass2.root)
 
+        val message = intent.getIntegerArrayListExtra("key")!!
 
-        var message = intent.getIntegerArrayListExtra("key")!!
-        val aver = message.average()
-        Log.e("myTag", aver.toString())
 
         bindingClass2.b2.setOnClickListener {
+            val aver = message.average()
+            Log.e("myTag", aver.toString())
             intent.putExtra("key2", aver)
-            setResult(RESULT_OK, intent, )
+            setResult(RESULT_OK, intent)
             finish()
-
-
-        // val message2 = intent.getIntExtra("key2", 1)
-
-        // bindingClass2.tv2.text = message.toString()
-        // bindingClass2.tv3.text = message2.toString()
-    }
-
-    fun onClickMain(view: View)  {
-
-
-            // intent.putExtra("key", )
         }
 
+        bindingClass2.bSum.setOnClickListener {
+            val sum = message.sum()
+            val iSum = Intent(this, MainActivity::class.java)
+            startActivityForResult(iSum, 101)
+            iSum.putExtra("key3", sum)
+            setResult(RESULT_OK, iSum)
+            finish()
+        }
     }
-
 }
