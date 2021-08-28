@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
         if (requestCode == 100 && resultCode == RESULT_FIRST_USER && data != null) {
             Log.e("myTag", data.toString())
-            bindingClass.tv1.text = data.getIntExtra("key4", 1).toString()
+            bindingClass.tv1.text = data.getIntArrayExtra("key4").toString()
         }
     }
 

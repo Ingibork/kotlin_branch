@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.View
 import com.example.homework_3.databinding.ActivityMain2Binding
 import java.util.*
+import java.util.stream.IntStream
+import android.R.array
+
 
 class MainActivity2 : AppCompatActivity() {
     lateinit var bindingClass2: ActivityMain2Binding
@@ -39,22 +42,31 @@ class MainActivity2 : AppCompatActivity() {
     fun ondDivision (view: View) {
         val message = intent.getIntegerArrayListExtra("key")!!
         val size = message.size
+        var s = size/2
         val mes = message.toArray()
         val myArray = IntArray(size)
-        val myArray1 = Arrays.copyOfRange(mes, 0, mes.size / 2)
-        val myArray2 = Arrays.copyOfRange(mes, mes.size / 2, mes.size)
-        Log.e("myTag", myArray1.toString())
-        Log.e("myTag", myArray2.toString())
-        val list = arrayListOf<Int>()
 
+        val m1 = Arrays.copyOfRange(mes, 0, mes.size / 2)
+        val m2 = Arrays.copyOfRange(mes, mes.size / 2, mes.size)
 
+        var sum = 0
+        Log.e("myTag", myArray.toString())
 
-        Log.e("myTag", message.toString())
-        intent.putExtra("key4", message)
+        for (i in 0 until m1.size) {
+            m1[i] = mes[i]
+            Log.e("myTag", m1[i].toString())
+        }
+        Log.e("myTag", m1.toString())
+        for (i in 0 until m2.size) {
+            m2[i] = mes[s]
+            s++
+            Log.e("myTag", m2[i].toString())
+        }
+        Log.e("myTag", m2.toString())
+
+        Log.e("myTag", m1.toString())
+        intent.putExtra("key4", m2)
         setResult(RESULT_FIRST_USER, intent)
         finish()
-        // val firstHalf: IntArray = Arrays.copyOfRange(original, 0, original.size / 2)
     }
-
-
 }
