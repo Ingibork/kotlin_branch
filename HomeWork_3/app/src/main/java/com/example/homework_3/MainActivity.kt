@@ -4,8 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.homework_3.databinding.ActivityMainBinding
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(s)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
-        jojo()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -23,29 +24,35 @@ class MainActivity : AppCompatActivity() {
             Log.e("myTag", data.toString())
             bindingClass.tv1.text = data.getDoubleExtra("key2", 1.0).toString()
         }
-        Log.e("myTag", data.toString())
-        val message2 = intent.getIntExtra("key3", 1)
-        bindingClass.tv1.text = message2.toString()
-        //val message = intent.getIntegerArrayListExtra("key")!!
+        if (requestCode == 100 && resultCode == RESULT_CANCELED && data != null) {
+            Log.e("myTag", data.toString())
+            bindingClass.tv1.text = data.getIntExtra("key3", 1).toString()
+        }
+        if (requestCode == 100 && resultCode == RESULT_FIRST_USER && data != null) {
+            Log.e("myTag", data.toString())
+            bindingClass.tv1.text = data.getIntExtra("key4", 1).toString()
+        }
     }
 
-    fun jojo() {
+    fun onClickStartAct2(view: View){
         val intent = Intent(this, MainActivity2::class.java)
-        bindingClass.b1.setOnClickListener {
-            var rnd = 1
-            val s = arrayListOf<Int>()
-            var i = 0
-            while (i < 5) {
-                while (rnd % 2 != 0) {
-                    rnd = Random.nextInt(10000)
-                }
-                s.add(rnd)
-                i++
+        var rnd = 1
+        val s = arrayListOf<Int>()
+        var i = 1
+        var count = 1
+        while (i%2 != 0 && i!=0) {
+            i = Random.nextInt(3..10)
+        }
+        while (count <= i) {
+            while (rnd % 2 != 0) {
                 rnd = Random.nextInt(10000)
             }
-            Log.e("myTag", s.toString())
-            intent.putIntegerArrayListExtra("key", s)
-            startActivityForResult(intent, 100)
+            s.add(rnd)
+            count++
+            rnd = Random.nextInt(10000)
         }
+        Log.e("myTag", s.toString())
+        intent.putIntegerArrayListExtra("key", s)
+        startActivityForResult(intent, 100)
     }
 }
