@@ -50,22 +50,22 @@ class MainActivity2 : AppCompatActivity() {
         val m2 = Arrays.copyOfRange(mes, mes.size / 2, mes.size)
 
         var sum = 0
-        Log.e("myTag", myArray.toString())
+
 
         for (i in 0 until m1.size) {
             m1[i] = mes[i]
             Log.e("myTag", m1[i].toString())
         }
-        Log.e("myTag", m1.toString())
+        Log.e("myTag", Arrays.toString(m1))
+
         for (i in 0 until m2.size) {
             m2[i] = mes[s]
             s++
             Log.e("myTag", m2[i].toString())
         }
-        Log.e("myTag", m2.toString())
+        
 
-        Log.e("myTag", m1.toString())
-        intent.putExtra("key4", m2)
+        intent.putExtra("key4", m1)
         setResult(RESULT_FIRST_USER, intent)
         finish()
     }
